@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>น้ำกรดเพิ่มน้ำหนักยาง - ผลิตภัณฑ์คุณภาพสูง</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a472a;
+            --primary-dark: #0d2417;
+            --accent: #ffd700;
+            --accent-light: #fff8dc;
+            --bg-light: #f8faf7;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a472a 0%, #2d7044 100%);
+            --gradient-2: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            --shadow: 0 10px 40px rgba(26, 71, 42, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: var(--gradient-1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+            display: block;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.8s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary-dark);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease 0.5s backwards;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-showcase {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-bottle {
+            width: 200px;
+            height: 400px;
+            background: linear-gradient(180deg, #2d7044 0%, #1a472a 100%);
+            border-radius: 50px 50px 20px 20px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .bottle-cap {
+            width: 60px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 10px 10px 0 0;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .bottle-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-2);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .benefits-image {
+            position: relative;
+        }
+
+        .benefits-image-main {
+            width: 100%;
+            height: 500px;
+            background: var(--gradient-1);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(26, 71, 42, 0.3);
+        }
+
+        .benefits-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .benefit-number {
+            min-width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+        }
+
+        .benefit-text h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-text p {
+            color: var(--text-light);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: var(--primary-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-specs {
+            margin: 1.5rem 0;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .spec-label {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .spec-value {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1.5rem 0;
+        }
+
+        .product-price small {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* How to Use Section */
+        .how-to-use {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            width: 2px;
+            height: calc(100% - 80px);
+            background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-content {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Order Channels Section */
+        .order-channels {
+            padding: 6rem 2rem;
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .order-channels::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>');
+        }
+
+        .order-channels .section-header h2 {
+            color: white;
+        }
+
+        .order-channels .section-header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .order-channels .section-badge {
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        .channels-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .channel-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .channel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .channel-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .shopee-icon {
+            background: linear-gradient(135deg, #ee4d2d 0%, #ff6442 100%);
+        }
+
+        .lazada-icon {
+            background: linear-gradient(135deg, #0f146d 0%, #1a2088 100%);
+        }
+
+        .tiktok-icon {
+            background: linear-gradient(135deg, #000000 0%, #fe2c55 50%, #00f2ea 100%);
+        }
+
+        .channel-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .channel-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .channel-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--gradient-1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .channel-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(26, 71, 42, 0.3);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details p {
+            color: var(--text-light);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(26, 71, 42, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero-container,
+            .benefits-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .channels-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                grid-template-columns: 80px 1fr;
+                gap: 1.5rem;
+            }
+
+            .step-number {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(26, 71, 42, 0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(26, 71, 42, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🌿</div>
+                <span>กรดยางหนัก</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">หน้าหลัก</a></li>
+                <li><a href="#features">คุณสมบัติ</a></li>
+                <li><a href="#benefits">ประโยชน์</a></li>
+                <li><a href="#products">ผลิตภัณฑ์</a></li>
+                <li><a href="#how-to-use">วิธีใช้</a></li>
+                <li><a href="#order">สั่งซื้อ</a></li>
+                <li><a href="#contact">ติดต่อ</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">✨ผลิตภัณฑ์คุณภาพ มาตรฐานส่งออก</div>
+                <h1>
+                    กรดเพิ่มน้ำหนักยาง
+                    <span class="highlight">หยดเดียวก็หนัก<br>ไม่ฉุนจัดไม่กัดมือ</span>
+                </h1>
+                <p class="hero-description">
+                    เพิ่มน้ำหนักยางก้อนและยางแผ่นได้อย่างมีประสิทธิภาพ ไม่เกิดเชื้อรา ลดต้นทุนการผลิต เพิ่มคุณภาพน้ำยาง 
+                    ด้วยสูตรพิเศษที่ผ่านการรับรองมาตรฐานจากการยาง เหมาะสำหรับเกษตรกรและโรงงานยาง
+                </p>
+                <div class="hero-buttons">
+                    <a href="#order" class="btn btn-primary">สั่งซื้อเลย 🛒</a>
+                    <a href="#products" class="btn btn-secondary">ดูผลิตภัณฑ์</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <div class="product-showcase">
+                        <div class="product-bottle">
+                            <div class="bottle-cap"></div>
+                            <div class="bottle-label">
+                                <div>
+                                    🌿<br>
+                                    น้ำกรด<br>
+                                    เพิ่มน้ำหนักยาง<br>
+                                    <small style="font-size: 0.8rem;">คุณภาพพรีเมียม</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-badge">⭐ จุดเด่น</div>
+            <h2>คุณสมบัติเด่นของผลิตภัณฑ์</h2>
+            <p>น้ำกรดเพิ่มน้ำหนักยางของเรามีคุณสมบัติพิเศษที่ช่วยเพิ่มประสิทธิภาพการผลิตยาง</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>เพิ่มน้ำหนักได้จริง</h3>
+                <p>สามารถเพิ่มน้ำหนักยางได้ 10-20% โดยไม่ทำลายคุณภาพของยาง ช่วยเพิ่มรายได้ให้เกษตรกร</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>ผ่านมาตรฐาน</h3>
+                <p>ผลิตภัณฑ์ได้รับการรับรองมาตรฐานจากการยางแห่งประเทศไทย และได้รับการคุ้มครองโดยอนุสิทธิบัตรเลขที่คำขอ 2101004112</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>ปลอดภัยต่อสิ่งแวดล้อม</h3>
+                <p>สูตรเป็นมิตรกับสิ่งแวดล้อม ไม่ส่งผลกระทบต่อต้นยาง และไม่กัดมือ ปลอดภัยต่อผู้ใช้</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>ประหยัดต้นทุน</h3>
+                <p>ใช้เพียงเล็กน้อยก็ได้ผลลัพธ์ที่ดี ช่วยลดต้นทุนการผลิตอย่างมีประสิทธิภาพ</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>ใช้งานง่าย</h3>
+                <p>วิธีการใช้ไม่ซับซ้อน ผสมกับน้ำยางได้ทันที ไม่ต้องใช้เครื่องมือพิเศษ</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>กลิ่นไม่ฉุน ยางไม่เหม็น</h3>
+                <p>เป็นกรดจากธรรมชาติกลิ่นไม่ฉุน และการหลังยางเป็นก้อนหรือแผ่นแล้วไม่ส่งกลิ่นเหม็น</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="benefits-container">
+            <div class="benefits-image">
+                <div class="benefits-image-main">
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 5rem;">
+                        🌳💚
+                    </div>
+                </div>
+            </div>
+            <div class="benefits-content">
+                <div class="section-badge">💪 ประโยชน์</div>
+                <h2>ทำไมต้องเลือกใช้ผลิตภัณฑ์ของเรา</h2>
+                <div class="benefit-item">
+                    <div class="benefit-number">1</div>
+                    <div class="benefit-text">
+                        <h4>เพิ่มรายได้ให้เกษตรกร</h4>
+                        <p>เพิ่มน้ำหนักยางได้จริง ทำให้ได้รับเงินมากขึ้นจากการขายยาง โดยไม่ส่งผลกระทบต่อคุณภาพ</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-number">2</div>
+                    <div class="benefit-text">
+                        <h4>ลดต้นทุนการผลิต</h4>
+                        <p>ใช้ปริมาณน้อย ได้ผลลัพธ์มาก ช่วยประหยัดค่าใช้จ่ายในการผลิตยางอย่างมีนัยสำคัญ</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-number">3</div>
+                    <div class="benefit-text">
+                        <h4>คุณภาพยางดีขึ้น</h4>
+                        <p>ช่วยให้ยางมีความยืดหยุ่น แข็งแรง และทนทานมากขึ้น เหมาะสำหรับการผลิตยางคุณภาพสูง</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-number">4</div>
+                    <div class="benefit-text">
+                        <h4>ใช้งานสะดวก</h4>
+                        <p>ไม่ต้องใช้เครื่องมือพิเศษ ผสมน้ำยางได้ทันที เกษตรกรทุกคนใช้งานได้ง่าย</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <div class="section-badge">🛍️ ผลิตภัณฑ์</div>
+            <h2>ผลิตภัณฑ์ของเรา</h2>
+            <p>เลือกผลิตภัณฑ์ที่เหมาะสมกับความต้องการของคุณ</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <div style="font-size: 4rem; color: white;">🫙</div>
+                </div>
+                <div class="product-info">
+                    <h3>แบบขวด 700 ml</h3>
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">ขนาด</span>
+                            <span class="spec-value">700 ml</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ใช้ได้</span>
+                            <span class="spec-value">250-350 ต้น</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ความเข้มข้น</span>
+                            <span class="spec-value">สูง</span>
+                        </div>
+                         <div class="spec-item">
+                            <span class="spec-label">ขายส่ง (คุ้มกว่า)</span>
+                            <span class="spec-value">1000+ (฿10/ขวด)</span>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        ฿12 บาท <small>/ ขวด</small>
+                    </div>
+                    <a href="#order" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <div class="product-badge">ขายดี</div>
+                    <div style="font-size: 4rem; color: white;">🫙</div>
+                </div>
+                <div class="product-info">
+                    <h3>แบบขวด 1000 ml</h3>
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">ขนาด</span>
+                            <span class="spec-value">1 ลิตร</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ใช้ได้</span>
+                            <span class="spec-value">300-400 ต้น</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ความเข้มข้น</span>
+                            <span class="spec-value">สูง</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ขายส่ง (คุ้มกว่า)</span>
+                            <span class="spec-value">1000+ (฿12/ขวด)</span>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        15 บาท <small>/ ขวด</small>
+                    </div>
+                    <a href="#order" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <div style="font-size: 4rem; color: white;">🛢️</div>
+                </div>
+                <div class="product-info">
+                    <h3>แบบแกลลอน</h3>
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">ขนาด</span>
+                            <span class="spec-value">5 ลิตร</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ใช้ได้</span>
+                            <span class="spec-value">2,000+ ต้น</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ความเข้มข้น</span>
+                            <span class="spec-value">สูง</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">ขายส่ง (คุ้มกว่า)</span>
+                            <span class="spec-value">1000+ (฿290/แกลลอน)</span>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                        300 บาท <small>/ แกลลอน</small>
+                    </div>
+                    <a href="#order" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="how-to-use" id="how-to-use">
+        <div class="section-header">
+            <div class="section-badge">📋 วิธีใช้</div>
+            <h2>วิธีการใช้งานที่ถูกต้อง</h2>
+            <p>ทำตามขั้นตอนเหล่านี้เพื่อผลลัพธ์ที่ดีที่สุด</p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>การผสมน้ำกรด</h3>
+                    <p>หยดน้ำกรด 1-2 หยดลงในน้ำยางพารา แล้วใช้ไม้คนให้เข้ากันทั่วถึง เพื่อให้น้ำกรดกระจายตัวอย่างสม่ำเสมอ</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>อัตราส่วนการผสม</h3>
+                    <p>น้ำยา 1 ขวดสามารถผสมกับน้ำยางพาราได้ 2-3 ลิตร หากต้องการให้น้ำยางแข็งตัวเร็วขึ้น สามารถเพิ่มปริมาณน้ำกรดได้ตามความเหมาะสม</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>ประสิทธิภาพการใช้งาน</h3>
+                    <p>น้ำกรด 1 ขวดสามารถใช้กรีดยางได้ 300-400 ต้น ช่วยประหยัดต้นทุนและเพิ่มประสิทธิภาพในการทำงาน</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Channels Section -->
+    <section class="order-channels" id="order">
+        <div class="section-header">
+            <div class="section-badge">🛒 ช่องทางสั่งซื้อ</div>
+            <h2>สั่งซื้อได้ง่ายๆ หลายช่องทาง</h2>
+            <p>เลือกช่องทางที่สะดวกสำหรับคุณ มั่นใจในคุณภาพและการจัดส่งที่รวดเร็ว</p>
+        </div>
+        <div class="channels-grid">
+            <div class="channel-card">
+                <div class="channel-icon shopee-icon">🛍️</div>
+                <h3>Shopee</h3>
+                <p>ช้อปง่ายๆ ส่งฟรี โปรโมชั่นเพียบ มีรีวิวจากลูกค้าจริง</p>
+                <a href="https://shopee.co.th/charoenchotyolai" class="channel-button">ซื้อที่ Shopee</a>
+            </div>
+            <div class="channel-card">
+                <div class="channel-icon lazada-icon">🛒</div>
+                <h3>Lazada</h3>
+                <p>ของแท้ 100% จัดส่งรวดเร็ว รับประกันความพึงพอใจ</p>
+                <a href="#" class="channel-button">ซื้อที่ Lazada</a>
+            </div>
+            <div class="channel-card">
+                <div class="channel-icon tiktok-icon">📱</div>
+                <h3>TikTok Shop</h3>
+                <p>ดีลสุดคุ้ม! ราคาพิเศษสำหรับลูกค้า TikTok โค้ดส่วนลดเพียบ</p>
+                <a href="https://www.tiktok.com/@nawattagamsr?_r=1&_t=ZS-93OFl88j4JI" class="channel-button">ซื้อที่ TikTok</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <div class="section-badge">📞 ติดต่อเรา</div>
+            <h2>ติดต่อสอบถามข้อมูล</h2>
+            <p>ทีมงานยินดีให้คำปรึกษาและตอบคำถามทุกข้อสงสัย</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>ข้อมูลการติดต่อ</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h4>โทรศัพท์</h4>
+                        <p>085-000-8627<br>089-620-5916</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h4>อีเมล</h4>
+                        <p>paving.sr@gmail.com <br>krodyangnak@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h4>ที่อยู่</h4>
+                        <p>232 หมู่ 7 โรงเรียนสหราษฎร์รังสฤษดิ์ <br>ถนนศรีสงคราม - ท่าดอกแก้ว <br>ตำบลศรีสงคราม อำเภอศรีสงคราม <br>จังหวัดนครพนม รหัสไปรษณีย์ 48150</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div class="contact-details">
+                        <h4>เวลาทำการ</h4>
+                        <p>จันทร์ - ศุกร์: 09:00 - 18:00<br>เสาร์-อาทิตย์: หยุดทำการ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>ส่งข้อความถึงเรา</h3>
+                <form>
+                    <div class="form-group">
+                        <label>ชื่อ-นามสกุล</label>
+                        <input type="text" placeholder="กรุณากรอกชื่อของคุณ" required>
+                    </div>
+                    <div class="form-group">
+                        <label>เบอร์โทรศัพท์</label>
+                        <input type="tel" placeholder="081-234-5678" required>
+                    </div>
+                    <div class="form-group">
+                        <label>อีเมล</label>
+                        <input type="email" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ข้อความ</label>
+                        <textarea placeholder="สอบถามข้อมูลเพิ่มเติม..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">ส่งข้อความ</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>เกี่ยวกับเรา</h4>
+                <p>ผู้ผลิตและจัดจำหน่ายน้ำกรดเพิ่มน้ำหนักยางคุณภาพสูง มาตรฐานส่งออก ด้วยประสบการณ์กว่า 15 ปี</p>
+            </div>
+            <div class="footer-section">
+                <h4>เมนูหลัก</h4>
+                <ul>
+                    <li><a href="#home">หน้าหลัก</a></li>
+                    <li><a href="#features">คุณสมบัติ</a></li>
+                    <li><a href="#products">ผลิตภัณฑ์</a></li>
+                    <li><a href="#contact">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>บริการ</h4>
+                <ul>
+                    <li><a href="#">คำถามที่พบบ่อย</a></li>
+                    <li><a href="#">นโยบายการคืนสินค้า</a></li>
+                    <li><a href="#">เงื่อนไขการใช้งาน</a></li>
+                    <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>ช่องทางสั่งซื้อ</h4>
+                <ul>
+                    <li><a href="#">Shopee Official</a></li>
+                    <li><a href="#">Lazada Mall</a></li>
+                    <li><a href="#">TikTok Shop</a></li>
+                    <li><a href="#">สั่งซื้อโดยตรง</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 น้ำกรดเพิ่มน้ำหนักยาง. สงวนลิขสิทธิ์. | ออกแบบด้วย ❤️ เพื่อเกษตรกรไทย</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top button
+        const scrollTop = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('ขอบคุณที่ติดต่อเรา! เราจะติดต่อกลับโดยเร็วที่สุด');
+            e.target.reset();
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.feature-card, .product-card, .channel-card, .benefit-item, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
