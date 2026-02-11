@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบหลังบ้าน - จัดการข้อมูลการติดต่อ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0; top: 0;
+            width: 260px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a472a 0%, #0d2417 100%);
+            color: white;
+            z-index: 100;
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .sidebar-header h2 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 18px;
+            color: #ffd700;
+        }
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .sidebar-menu { padding: 16px 0; }
+        .menu-label {
+            padding: 8px 20px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+            font-size: 15px;
+        }
+        .menu-item:hover { background: rgba(255,255,255,0.08); }
+        .menu-item.active {
+            background: rgba(255,215,0,0.1);
+            border-left-color: #ffd700;
+            color: #ffd700;
+        }
+        .menu-item .icon { font-size: 20px; width: 24px; text-align: center; }
+        .menu-item .badge {
+            margin-left: auto;
+            background: #e74c3c;
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            padding: 24px;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .top-bar h1 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 24px;
+            color: #1a472a;
+        }
+        .top-bar .back-link {
+            color: #1a472a;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 1px solid #1a472a;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .top-bar .back-link:hover {
+            background: #1a472a;
+            color: white;
+        }
+        .hamburger {
+            display: none;
+            background: #1a472a;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+        }
+        .stat-card.total::before { background: #1a472a; }
+        .stat-card.pending::before { background: #f39c12; }
+        .stat-card.completed::before { background: #27ae60; }
+        .stat-card.today::before { background: #3498db; }
+        .stat-card .stat-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .stat-card .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            font-family: 'Bai Jamjuree', sans-serif;
+            color: #1a472a;
+        }
+        .stat-card .stat-label {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* Page sections */
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+
+        /* Table / Cards */
+        .data-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .data-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .data-header h3 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            color: #1a472a;
+        }
+        .filter-group {
+            display: flex;
+            gap: 8px;
+        }
+        .filter-btn {
+            padding: 6px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Sarabun', sans-serif;
+            transition: all 0.2s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #1a472a;
+            color: white;
+            border-color: #1a472a;
+        }
+
+        /* Contact Cards (mobile-friendly list) */
+        .contact-list { padding: 0; }
+        .contact-card {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: start;
+            transition: background 0.2s;
+        }
+        .contact-card:hover { background: #fafafa; }
+        .contact-card:last-child { border-bottom: none; }
+        .contact-info h4 {
+            font-size: 16px;
+            color: #1a472a;
+            margin-bottom: 6px;
+        }
+        .contact-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .contact-meta span { display: flex; align-items: center; gap: 4px; }
+        .contact-message {
+            font-size: 14px;
+            color: #555;
+            background: #f8f9fa;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border-left: 3px solid #1a472a;
+            margin-top: 8px;
+        }
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .btn-confirm {
+            padding: 8px 16px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Sarabun', sans-serif;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .btn-confirm:hover { background: #219a52; transform: scale(1.02); }
+        .btn-confirm:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-delete {
+            padding: 6px 12px;
+            background: transparent;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: 'Sarabun', sans-serif;
+            transition: all 0.2s;
+        }
+        .btn-delete:hover { background: #e74c3c; color: white; }
+        .contact-date {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* Stats Page */
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        .chart-container h3 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            color: #1a472a;
+            margin-bottom: 16px;
+        }
+        .chart-bar-group {
+            margin-bottom: 12px;
+        }
+        .chart-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 4px;
+            color: #555;
+        }
+        .chart-bar-track {
+            height: 28px;
+            background: #f0f0f0;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .chart-bar-fill {
+            height: 100%;
+            border-radius: 14px;
+            transition: width 0.8s ease;
+            display: flex;
+            align-items: center;
+            padding-left: 12px;
+            font-size: 12px;
+            color: white;
+            font-weight: 600;
+        }
+        .chart-bar-fill.green { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .chart-bar-fill.yellow { background: linear-gradient(90deg, #f39c12, #f1c40f); }
+        .chart-bar-fill.blue { background: linear-gradient(90deg, #2980b9, #3498db); }
+
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .summary-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        .summary-item .big-number {
+            font-size: 36px;
+            font-weight: 700;
+            font-family: 'Bai Jamjuree', sans-serif;
+            color: #1a472a;
+        }
+        .summary-item .label { font-size: 13px; color: #888; margin-top: 4px; }
+
+        /* Order card specifics */
+        .order-product-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a472a, #27ae60);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .order-detail-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 13px;
+            color: #555;
+            margin-top: 6px;
+        }
+        .order-detail-row span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .order-price-total {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a472a;
+            margin-top: 4px;
+        }
+        .order-address {
+            font-size: 13px;
+            color: #555;
+            background: #f8f9fa;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border-left: 3px solid #f39c12;
+            margin-top: 8px;
+        }
+        .stats-grid-6 {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 968px) {
+            .stats-grid-6 { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .stats-grid-6 { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
+        }
+        .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+        .empty-state p { font-size: 15px; }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        .spinner {
+            display: inline-block;
+            width: 36px; height: 36px;
+            border: 3px solid #eee;
+            border-top-color: #1a472a;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #1a472a 0%, #0d2417 60%, #000 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-screen.hidden { display: none; }
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+        .login-box .login-logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #1a472a, #27ae60);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px;
+            box-shadow: 0 8px 24px rgba(26,71,42,0.3);
+        }
+        .login-box h2 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            color: #1a472a;
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+        .login-box .login-subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+        .login-box .login-field {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+        .login-box .login-field label {
+            display: block;
+            font-weight: 600;
+            color: #1a472a;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        .login-box .login-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+        .login-box .login-field input:focus {
+            outline: none;
+            border-color: #1a472a;
+        }
+        .login-box .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #1a472a, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Sarabun', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 6px;
+        }
+        .login-box .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26,71,42,0.3);
+        }
+        .login-error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+        }
+        .login-error.show { display: block; }
+        .login-box .login-field .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #888;
+            padding: 4px;
+        }
+        .login-box .login-field .input-wrapper {
+            position: relative;
+        }
+
+        /* Overlay for mobile sidebar */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 90;
+        }
+        .overlay.active { display: block; }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .hamburger { display: block; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .stat-card { padding: 14px; }
+            .stat-card .stat-number { font-size: 24px; }
+            .main-content { padding: 16px; }
+            .top-bar h1 { font-size: 18px; }
+            .contact-card {
+                grid-template-columns: 1fr;
+            }
+            .contact-actions {
+                flex-direction: row;
+                align-items: center;
+            }
+            .filter-group { flex-wrap: wrap; }
+            .stats-summary { grid-template-columns: 1fr; }
+            .data-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <div class="login-logo">&#128274;</div>
+            <h2>เข้าสู่ระบบ</h2>
+            <p class="login-subtitle">ระบบจัดการหลังบ้าน - Admin Panel</p>
+            <form id="loginForm">
+                <div class="login-field">
+                    <label>อีเมล</label>
+                    <input type="email" id="loginEmail" placeholder="กรอกอีเมล" required autocomplete="email">
+                </div>
+                <div class="login-field">
+                    <label>รหัสผ่าน</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="loginPassword" placeholder="กรอกรหัสผ่าน" required autocomplete="current-password">
+                        <button type="button" class="toggle-password" id="togglePassword">&#128065;</button>
+                    </div>
+                </div>
+                <button type="submit" class="login-btn">&#128274; เข้าสู่ระบบ</button>
+                <p class="login-error" id="loginError">&#9888; อีเมลหรือรหัสผ่านไม่ถูกต้อง</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Admin Panel</h2>
+            <p>ระบบจัดการหลังบ้าน</p>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-label">ข้อมูลการติดต่อ</div>
+            <div class="menu-item active" data-page="contacts">
+                <span class="icon">&#128233;</span>
+                <span>รอดำเนินการ</span>
+                <span class="badge" id="pendingBadge">0</span>
+            </div>
+            <div class="menu-item" data-page="completed">
+                <span class="icon">&#9989;</span>
+                <span>ดำเนินการแล้ว</span>
+            </div>
+            <div class="menu-label" style="margin-top:12px;">คำสั่งซื้อ</div>
+            <div class="menu-item" data-page="orders">
+                <span class="icon">&#128722;</span>
+                <span>รอยืนยัน</span>
+                <span class="badge" id="orderPendingBadge">0</span>
+            </div>
+            <div class="menu-item" data-page="orders-completed">
+                <span class="icon">&#128230;</span>
+                <span>ยืนยันแล้ว</span>
+            </div>
+            <div class="menu-label" style="margin-top:12px;">ภาพรวม</div>
+            <div class="menu-item" data-page="stats">
+                <span class="icon">&#128202;</span>
+                <span>สถิติ</span>
+            </div>
+            <div class="menu-label" style="margin-top: 16px;">อื่นๆ</div>
+            <a href="index.html" style="text-decoration:none;color:inherit;">
+                <div class="menu-item">
+                    <span class="icon">&#127968;</span>
+                    <span>กลับหน้าเว็บไซต์</span>
+                </div>
+            </a>
+            <div class="menu-item" id="logoutBtn" style="color:#e74c3c;">
+                <span class="icon">&#128682;</span>
+                <span>ออกจากระบบ</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-bar">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="hamburger" id="hamburger">&#9776;</button>
+                <h1 id="pageTitle">ข้อมูลการติดต่อ</h1>
+            </div>
+            <a href="index.html" class="back-link">&#127968; กลับหน้าเว็บ</a>
+        </div>
+
+        <!-- Stats Cards (always visible) -->
+        <div class="stats-grid-6">
+            <div class="stat-card total">
+                <div class="stat-icon">&#128233;</div>
+                <div class="stat-number" id="statTotal">0</div>
+                <div class="stat-label">ข้อความทั้งหมด</div>
+            </div>
+            <div class="stat-card pending">
+                <div class="stat-icon">&#9203;</div>
+                <div class="stat-number" id="statPending">0</div>
+                <div class="stat-label">ข้อความรอดำเนินการ</div>
+            </div>
+            <div class="stat-card completed">
+                <div class="stat-icon">&#9989;</div>
+                <div class="stat-number" id="statCompleted">0</div>
+                <div class="stat-label">ข้อความเสร็จแล้ว</div>
+            </div>
+            <div class="stat-card total">
+                <div class="stat-icon">&#128722;</div>
+                <div class="stat-number" id="statOrderTotal">0</div>
+                <div class="stat-label">คำสั่งซื้อทั้งหมด</div>
+            </div>
+            <div class="stat-card pending">
+                <div class="stat-icon">&#128230;</div>
+                <div class="stat-number" id="statOrderPending">0</div>
+                <div class="stat-label">คำสั่งซื้อรอยืนยัน</div>
+            </div>
+            <div class="stat-card today">
+                <div class="stat-icon">&#128197;</div>
+                <div class="stat-number" id="statToday">0</div>
+                <div class="stat-label">เข้ามาวันนี้</div>
+            </div>
+        </div>
+
+        <!-- Page: Contacts (Pending) -->
+        <div class="page-section active" id="page-contacts">
+            <div class="data-container">
+                <div class="data-header">
+                    <h3>&#128233; รายการรอดำเนินการ</h3>
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-sort="newest">ล่าสุด</button>
+                        <button class="filter-btn" data-sort="oldest">เก่าสุด</button>
+                    </div>
+                </div>
+                <div class="contact-list" id="pendingList">
+                    <div class="loading"><div class="spinner"></div><p>กำลังโหลดข้อมูล...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page: Completed -->
+        <div class="page-section" id="page-completed">
+            <div class="data-container">
+                <div class="data-header">
+                    <h3>&#9989; ดำเนินการแล้ว</h3>
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-sort="newest">ล่าสุด</button>
+                        <button class="filter-btn" data-sort="oldest">เก่าสุด</button>
+                    </div>
+                </div>
+                <div class="contact-list" id="completedList">
+                    <div class="loading"><div class="spinner"></div><p>กำลังโหลดข้อมูล...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page: Orders (Pending) -->
+        <div class="page-section" id="page-orders">
+            <div class="data-container">
+                <div class="data-header">
+                    <h3>&#128722; คำสั่งซื้อรอยืนยัน</h3>
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-sort="newest">ล่าสุด</button>
+                        <button class="filter-btn" data-sort="oldest">เก่าสุด</button>
+                    </div>
+                </div>
+                <div class="contact-list" id="orderPendingList">
+                    <div class="loading"><div class="spinner"></div><p>กำลังโหลดข้อมูล...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page: Orders Completed -->
+        <div class="page-section" id="page-orders-completed">
+            <div class="data-container">
+                <div class="data-header">
+                    <h3>&#128230; คำสั่งซื้อยืนยันแล้ว</h3>
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-sort="newest">ล่าสุด</button>
+                        <button class="filter-btn" data-sort="oldest">เก่าสุด</button>
+                    </div>
+                </div>
+                <div class="contact-list" id="orderCompletedList">
+                    <div class="loading"><div class="spinner"></div><p>กำลังโหลดข้อมูล...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page: Stats -->
+        <div class="page-section" id="page-stats">
+            <div class="chart-container">
+                <h3>&#128202; สัดส่วนการดำเนินการ</h3>
+                <div class="chart-bar-group">
+                    <div class="chart-bar-label">
+                        <span>ดำเนินการแล้ว</span>
+                        <span id="barCompletedPct">0%</span>
+                    </div>
+                    <div class="chart-bar-track">
+                        <div class="chart-bar-fill green" id="barCompleted" style="width:0%"></div>
+                    </div>
+                </div>
+                <div class="chart-bar-group">
+                    <div class="chart-bar-label">
+                        <span>รอดำเนินการ</span>
+                        <span id="barPendingPct">0%</span>
+                    </div>
+                    <div class="chart-bar-track">
+                        <div class="chart-bar-fill yellow" id="barPending" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-summary" id="statsSummary">
+                <div class="summary-item">
+                    <div class="big-number" id="summaryTotal">0</div>
+                    <div class="label">ข้อความทั้งหมด</div>
+                </div>
+                <div class="summary-item">
+                    <div class="big-number" id="summaryCompleted">0</div>
+                    <div class="label">ดำเนินการแล้ว</div>
+                </div>
+                <div class="summary-item">
+                    <div class="big-number" id="summaryPending">0</div>
+                    <div class="label">รอดำเนินการ</div>
+                </div>
+                <div class="summary-item">
+                    <div class="big-number" id="summaryRate">0%</div>
+                    <div class="label">อัตราการดำเนินการ</div>
+                </div>
+                <div class="summary-item" style="grid-column: 1 / -1;">
+                    <div class="big-number" id="summaryRevenue" style="color:#27ae60;">฿0</div>
+                    <div class="label">รายได้จากคำสั่งซื้อที่ยืนยันแล้ว</div>
+                </div>
+            </div>
+
+            <div class="chart-container" style="margin-top:20px;">
+                <h3>&#128197; ข้อความรายวัน (7 วันล่าสุด)</h3>
+                <div id="dailyChart"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDF6TZkL6TRB3S46skT1NBXUcyZUHY0gCQ",
+            authDomain: "krodyangnak-7b119.firebaseapp.com",
+            projectId: "krodyangnak-7b119",
+            storageBucket: "krodyangnak-7b119.firebasestorage.app",
+            messagingSenderId: "797921096322",
+            appId: "1:797921096322:web:7edec9ddb02a6d89fffa9b",
+            measurementId: "G-TVY0WEH6EV"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // === Login System ===
+        const AUTH_EMAIL = 'Krodyangnak@gmail.com';
+        const AUTH_PASS = 'Krodyangnak#2026';
+        const SESSION_KEY = 'admin_session';
+
+        const loginScreen = document.getElementById('loginScreen');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+
+        // Check existing session
+        if (sessionStorage.getItem(SESSION_KEY) === 'authenticated') {
+            loginScreen.classList.add('hidden');
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (email === AUTH_EMAIL && password === AUTH_PASS) {
+                sessionStorage.setItem(SESSION_KEY, 'authenticated');
+                loginScreen.classList.add('hidden');
+                loginError.classList.remove('show');
+            } else {
+                loginError.classList.add('show');
+                document.getElementById('loginPassword').value = '';
+            }
+        });
+
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', () => {
+            const pwInput = document.getElementById('loginPassword');
+            const btn = document.getElementById('togglePassword');
+            if (pwInput.type === 'password') {
+                pwInput.type = 'text';
+                btn.innerHTML = '&#128580;';
+            } else {
+                pwInput.type = 'password';
+                btn.innerHTML = '&#128065;';
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            if (confirm('ต้องการออกจากระบบหรือไม่?')) {
+                sessionStorage.removeItem(SESSION_KEY);
+                loginScreen.classList.remove('hidden');
+                document.getElementById('loginEmail').value = '';
+                document.getElementById('loginPassword').value = '';
+                loginError.classList.remove('show');
+                closeSidebar();
+            }
+        });
+
+        // State
+        let allContacts = [];
+        let allOrders = [];
+        let sortOrder = 'newest';
+
+        // --- Sidebar Navigation ---
+        const menuItems = document.querySelectorAll('.menu-item[data-page]');
+        const pages = document.querySelectorAll('.page-section');
+        const pageTitle = document.getElementById('pageTitle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburger');
+
+        const pageTitles = {
+            contacts: 'ข้อมูลการติดต่อ',
+            completed: 'ดำเนินการแล้ว',
+            orders: 'คำสั่งซื้อรอยืนยัน',
+            'orders-completed': 'คำสั่งซื้อยืนยันแล้ว',
+            stats: 'สถิติ'
+        };
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const page = item.getAttribute('data-page');
+                menuItems.forEach(m => m.classList.remove('active'));
+                item.classList.add('active');
+                pages.forEach(p => p.classList.remove('active'));
+                document.getElementById('page-' + page).classList.add('active');
+                pageTitle.textContent = pageTitles[page];
+                closeSidebar();
+            });
+        });
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+        overlay.addEventListener('click', closeSidebar);
+
+        // --- Filter buttons ---
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                sortOrder = this.getAttribute('data-sort');
+                renderContacts();
+                renderOrders();
+            });
+        });
+
+        // --- Load contacts from Firestore (real-time) ---
+        db.collection('contacts').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+            allContacts = [];
+            snapshot.forEach(doc => {
+                allContacts.push({ id: doc.id, ...doc.data() });
+            });
+            renderContacts();
+            updateStats();
+        }, error => {
+            console.error('Firestore error:', error);
+            document.getElementById('pendingList').innerHTML =
+                '<div class="empty-state"><div class="icon">&#9888;</div><p>ไม่สามารถโหลดข้อมูลได้ กรุณาตรวจสอบการเชื่อมต่อ</p></div>';
+        });
+
+        // --- Render contacts ---
+        function renderContacts() {
+            const pending = allContacts.filter(c => c.status === 'pending');
+            const completed = allContacts.filter(c => c.status === 'completed');
+
+            const sortFn = sortOrder === 'newest'
+                ? (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)
+                : (a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0);
+
+            renderList('pendingList', pending.sort(sortFn), true);
+            renderList('completedList', completed.sort(sortFn), false);
+        }
+
+        function renderList(containerId, items, showConfirm) {
+            const container = document.getElementById(containerId);
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">${showConfirm ? '&#128233;' : '&#9989;'}</div>
+                        <p>${showConfirm ? 'ไม่มีข้อความที่รอดำเนินการ' : 'ยังไม่มีรายการที่ดำเนินการแล้ว'}</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = items.map(contact => {
+                const date = contact.createdAt
+                    ? new Date(contact.createdAt.seconds * 1000).toLocaleString('th-TH', {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    })
+                    : 'ไม่ระบุเวลา';
+
+                const completedDate = contact.completedAt
+                    ? new Date(contact.completedAt.seconds * 1000).toLocaleString('th-TH', {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    })
+                    : '';
+
+                return `
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <h4>${escapeHtml(contact.name || 'ไม่ระบุชื่อ')}</h4>
+                        <div class="contact-meta">
+                            <span>&#128222; ${escapeHtml(contact.phone || '-')}</span>
+                            <span>&#128231; ${escapeHtml(contact.email || '-')}</span>
+                        </div>
+                        <div class="contact-message">${escapeHtml(contact.message || '-')}</div>
+                        <div class="contact-date" style="margin-top:8px;">
+                            &#128197; ส่งเมื่อ: ${date}
+                            ${completedDate ? '<br>&#9989; ดำเนินการเมื่อ: ' + completedDate : ''}
+                        </div>
+                    </div>
+                    <div class="contact-actions">
+                        <span class="status-badge ${contact.status}">
+                            ${contact.status === 'pending' ? '&#9203; รอดำเนินการ' : '&#9989; เสร็จแล้ว'}
+                        </span>
+                        ${showConfirm ? `<button class="btn-confirm" onclick="confirmContact('${contact.id}')">&#9989; ยืนยันดำเนินการ</button>` : ''}
+                        <button class="btn-delete" onclick="deleteContact('${contact.id}')">&#128465; ลบ</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // --- Confirm (mark as completed) ---
+        async function confirmContact(id) {
+            if (!confirm('ยืนยันว่าดำเนินการเรียบร้อยแล้ว?')) return;
+            try {
+                await db.collection('contacts').doc(id).update({
+                    status: 'completed',
+                    completedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            } catch (err) {
+                alert('เกิดข้อผิดพลาด: ' + err.message);
+            }
+        }
+
+        // --- Delete ---
+        async function deleteContact(id) {
+            if (!confirm('ต้องการลบข้อมูลนี้หรือไม่?')) return;
+            try {
+                await db.collection('contacts').doc(id).delete();
+            } catch (err) {
+                alert('เกิดข้อผิดพลาด: ' + err.message);
+            }
+        }
+
+        // --- Load orders from Firestore (real-time) ---
+        db.collection('orders').orderBy('createdAt', 'desc').onSnapshot(snapshot => {
+            allOrders = [];
+            snapshot.forEach(doc => {
+                allOrders.push({ id: doc.id, ...doc.data() });
+            });
+            renderOrders();
+            updateStats();
+        }, error => {
+            console.error('Firestore orders error:', error);
+        });
+
+        // --- Render orders ---
+        function renderOrders() {
+            const pending = allOrders.filter(o => o.status === 'pending');
+            const completed = allOrders.filter(o => o.status === 'completed');
+
+            const sortFn = sortOrder === 'newest'
+                ? (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)
+                : (a, b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0);
+
+            renderOrderList('orderPendingList', pending.sort(sortFn), true);
+            renderOrderList('orderCompletedList', completed.sort(sortFn), false);
+        }
+
+        function renderOrderList(containerId, items, showConfirm) {
+            const container = document.getElementById(containerId);
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">${showConfirm ? '&#128722;' : '&#128230;'}</div>
+                        <p>${showConfirm ? 'ไม่มีคำสั่งซื้อที่รอยืนยัน' : 'ยังไม่มีคำสั่งซื้อที่ยืนยันแล้ว'}</p>
+                    </div>`;
+                return;
+            }
+
+            container.innerHTML = items.map(order => {
+                const date = order.createdAt
+                    ? new Date(order.createdAt.seconds * 1000).toLocaleString('th-TH', {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    })
+                    : 'ไม่ระบุเวลา';
+
+                const completedDate = order.completedAt
+                    ? new Date(order.completedAt.seconds * 1000).toLocaleString('th-TH', {
+                        year: 'numeric', month: 'short', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    })
+                    : '';
+
+                return `
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <h4>${escapeHtml(order.name || 'ไม่ระบุชื่อ')}</h4>
+                        <div class="contact-meta">
+                            <span>&#128222; ${escapeHtml(order.phone || '-')}</span>
+                        </div>
+                        <div style="margin-top:6px;">
+                            <span class="order-product-tag">${escapeHtml(order.product || '-')}</span>
+                        </div>
+                        <div class="order-detail-row">
+                            <span>&#128230; จำนวน: <strong>${order.quantity || 0}</strong></span>
+                            <span>&#128181; ราคา/ชิ้น: ฿${(order.pricePerUnit || 0).toLocaleString()}</span>
+                        </div>
+                        <div class="order-price-total">&#128176; รวม: ฿${(order.totalPrice || 0).toLocaleString()}</div>
+                        <div class="order-address">&#128205; ${escapeHtml(order.address || 'ไม่ระบุที่อยู่')}</div>
+                        ${order.note ? `<div class="contact-message" style="border-left-color:#3498db;">&#128221; ${escapeHtml(order.note)}</div>` : ''}
+                        <div class="contact-date" style="margin-top:8px;">
+                            &#128197; สั่งเมื่อ: ${date}
+                            ${completedDate ? '<br>&#9989; ยืนยันเมื่อ: ' + completedDate : ''}
+                        </div>
+                    </div>
+                    <div class="contact-actions">
+                        <span class="status-badge ${order.status}">
+                            ${order.status === 'pending' ? '&#9203; รอยืนยัน' : '&#9989; ยืนยันแล้ว'}
+                        </span>
+                        ${showConfirm ? `<button class="btn-confirm" onclick="confirmOrder('${order.id}')">&#9989; ยืนยันคำสั่งซื้อ</button>` : ''}
+                        <button class="btn-delete" onclick="deleteOrder('${order.id}')">&#128465; ลบ</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        // --- Confirm order ---
+        async function confirmOrder(id) {
+            if (!confirm('ยืนยันคำสั่งซื้อนี้?')) return;
+            try {
+                await db.collection('orders').doc(id).update({
+                    status: 'completed',
+                    completedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            } catch (err) {
+                alert('เกิดข้อผิดพลาด: ' + err.message);
+            }
+        }
+
+        // --- Delete order ---
+        async function deleteOrder(id) {
+            if (!confirm('ต้องการลบคำสั่งซื้อนี้หรือไม่?')) return;
+            try {
+                await db.collection('orders').doc(id).delete();
+            } catch (err) {
+                alert('เกิดข้อผิดพลาด: ' + err.message);
+            }
+        }
+
+        // --- Update Stats ---
+        function updateStats() {
+            const total = allContacts.length;
+            const pending = allContacts.filter(c => c.status === 'pending').length;
+            const completed = allContacts.filter(c => c.status === 'completed').length;
+
+            const orderTotal = allOrders.length;
+            const orderPending = allOrders.filter(o => o.status === 'pending').length;
+            const orderCompleted = allOrders.filter(o => o.status === 'completed').length;
+
+            const now = new Date();
+            const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 1000;
+            const todayContacts = allContacts.filter(c => c.createdAt && c.createdAt.seconds >= todayStart).length;
+            const todayOrders = allOrders.filter(o => o.createdAt && o.createdAt.seconds >= todayStart).length;
+
+            // Top stat cards
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statPending').textContent = pending;
+            document.getElementById('statCompleted').textContent = completed;
+            document.getElementById('statOrderTotal').textContent = orderTotal;
+            document.getElementById('statOrderPending').textContent = orderPending;
+            document.getElementById('statToday').textContent = todayContacts + todayOrders;
+            document.getElementById('pendingBadge').textContent = pending;
+            document.getElementById('orderPendingBadge').textContent = orderPending;
+
+            // Stats page
+            const allTotal = total + orderTotal;
+            const allCompleted = completed + orderCompleted;
+            const allPending = pending + orderPending;
+            const completedPct = allTotal > 0 ? Math.round((allCompleted / allTotal) * 100) : 0;
+            const pendingPct = allTotal > 0 ? Math.round((allPending / allTotal) * 100) : 0;
+
+            document.getElementById('barCompleted').style.width = completedPct + '%';
+            document.getElementById('barCompletedPct').textContent = completedPct + '%';
+            document.getElementById('barPending').style.width = pendingPct + '%';
+            document.getElementById('barPendingPct').textContent = pendingPct + '%';
+
+            document.getElementById('summaryTotal').textContent = allTotal;
+            document.getElementById('summaryCompleted').textContent = allCompleted;
+            document.getElementById('summaryPending').textContent = allPending;
+            document.getElementById('summaryRate').textContent = completedPct + '%';
+
+            // Revenue stats
+            const totalRevenue = allOrders.filter(o => o.status === 'completed').reduce((sum, o) => sum + (o.totalPrice || 0), 0);
+            const revenueEl = document.getElementById('summaryRevenue');
+            if (revenueEl) revenueEl.textContent = '฿' + totalRevenue.toLocaleString();
+
+            // Daily chart (last 7 days)
+            renderDailyChart();
+        }
+
+        function renderDailyChart() {
+            const days = [];
+            const now = new Date();
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(now);
+                d.setDate(d.getDate() - i);
+                days.push({
+                    label: d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short' }),
+                    start: new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() / 1000,
+                    end: new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime() / 1000,
+                    contacts: 0,
+                    orders: 0
+                });
+            }
+
+            allContacts.forEach(c => {
+                if (!c.createdAt) return;
+                const ts = c.createdAt.seconds;
+                days.forEach(day => {
+                    if (ts >= day.start && ts < day.end) day.contacts++;
+                });
+            });
+
+            allOrders.forEach(o => {
+                if (!o.createdAt) return;
+                const ts = o.createdAt.seconds;
+                days.forEach(day => {
+                    if (ts >= day.start && ts < day.end) day.orders++;
+                });
+            });
+
+            const maxCount = Math.max(...days.map(d => d.contacts + d.orders), 1);
+            const chartHtml = days.map(day => {
+                const total = day.contacts + day.orders;
+                const pct = Math.round((total / maxCount) * 100);
+                return `
+                <div class="chart-bar-group">
+                    <div class="chart-bar-label">
+                        <span>${day.label}</span>
+                        <span>${day.contacts} ข้อความ / ${day.orders} คำสั่งซื้อ</span>
+                    </div>
+                    <div class="chart-bar-track">
+                        <div class="chart-bar-fill blue" style="width:${pct}%">${total > 0 ? total : ''}</div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            document.getElementById('dailyChart').innerHTML = chartHtml;
+        }
+
+        // --- Utility ---
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

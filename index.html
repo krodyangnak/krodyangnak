@@ -270,11 +270,17 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .hero-image-wrapper img {
+        .product-showcase {
             width: 100%;
             height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-showcase img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         /* Features Section */
@@ -789,7 +795,8 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 1rem;
             border: 2px solid #e0e0e0;
@@ -797,10 +804,12 @@
             font-family: 'Sarabun', sans-serif;
             font-size: 1rem;
             transition: all 0.3s;
+            background: white;
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: var(--accent);
         }
@@ -808,6 +817,180 @@
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
+        }
+
+        /* Order Form Section */
+        .order-form-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f8fdf9 0%, #eef7f0 100%);
+        }
+
+        .order-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .order-form-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(26, 71, 42, 0.08);
+        }
+
+        .order-form-box h3 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .order-form-box .form-subtitle {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .product-select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .product-option:hover {
+            border-color: var(--primary);
+            background: #f8fdf9;
+        }
+
+        .product-option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #f0f9f2 0%, #e8f5eb 100%);
+            box-shadow: 0 2px 8px rgba(26, 71, 42, 0.1);
+        }
+
+        .product-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .product-option-info {
+            flex: 1;
+        }
+
+        .product-option-info .name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .product-option-info .detail {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .product-option .price-tag {
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .order-summary {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2417 100%);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .order-summary.visible {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .order-summary .summary-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .order-summary .summary-total {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Bai Jamjuree', sans-serif;
+            color: var(--accent);
+        }
+
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .qty-btn:first-child { border-radius: 10px 0 0 10px; }
+        .qty-btn:last-child { border-radius: 0 10px 10px 0; }
+        .qty-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .quantity-input input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-left: none;
+            border-right: none;
+            border-radius: 0;
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0;
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .order-form-box {
+                padding: 1.5rem;
+            }
         }
 
         .submit-btn {
@@ -1036,13 +1219,15 @@
                     ด้วยสูตรพิเศษที่ผ่านการรับรองมาตรฐานจากการยาง เหมาะสำหรับเกษตรกรและโรงงานยาง
                 </p>
                 <div class="hero-buttons">
-                    <a href="#order" class="btn btn-primary">สั่งซื้อเลย 🛒</a>
+                    <a href="#order-form" class="btn btn-primary">สั่งซื้อเลย 🛒</a>
                     <a href="#products" class="btn btn-secondary">ดูผลิตภัณฑ์</a>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="hero-image-wrapper">
-                    <img src="img1.jpg" alt="น้ำกรดเพิ่มน้ำหนักยาง - ผลิตภัณฑ์คุณภาพสูง">
+                    <div class="product-showcase">
+                        <img src="img1.jpg" alt="น้ำกรดเพิ่มน้ำหนักยาง - ผลิตภัณฑ์คุณภาพสูง">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1169,7 +1354,7 @@
                     <div class="product-price">
                         ฿12 บาท <small>/ ขวด</small>
                     </div>
-                    <a href="#order" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
+                    <a href="#order-form" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
                 </div>
             </div>
 
@@ -1201,7 +1386,7 @@
                     <div class="product-price">
                         15 บาท <small>/ ขวด</small>
                     </div>
-                    <a href="#order" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
+                    <a href="#order-form" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
                 </div>
             </div>
 
@@ -1232,7 +1417,7 @@
                     <div class="product-price">
                         300 บาท <small>/ แกลลอน</small>
                     </div>
-                    <a href="#order" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
+                    <a href="#order-form" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
                 </div>
             </div>
         </div>
@@ -1282,7 +1467,7 @@
                 <div class="channel-icon shopee-icon">🛍️</div>
                 <h3>Shopee</h3>
                 <p>ช้อปง่ายๆ ส่งฟรี โปรโมชั่นเพียบ มีรีวิวจากลูกค้าจริง</p>
-                <a href="https://shopee.co.th/charoenchotyolai" class="channel-button">ซื้อที่ Shopee</a>
+                <a href="https://shopee.co.th/product/1735260953/47105333851/" class="channel-button">ซื้อที่ Shopee</a>
             </div>
             <div class="channel-card">
                 <div class="channel-icon lazada-icon">🛒</div>
@@ -1294,7 +1479,97 @@
                 <div class="channel-icon tiktok-icon">📱</div>
                 <h3>TikTok Shop</h3>
                 <p>ดีลสุดคุ้ม! ราคาพิเศษสำหรับลูกค้า TikTok โค้ดส่วนลดเพียบ</p>
-                <a href="https://www.tiktok.com/@nawattagamsr?_r=1&_t=ZS-93OFl88j4JI" class="channel-button">ซื้อที่ TikTok</a>
+                <a href="https://vt.tiktok.com/ZS9JDDAtXjyg5-CiDN4/" class="channel-button">ซื้อที่ TikTok</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Section -->
+    <section class="order-form-section" id="order-form">
+        <div class="section-header">
+            <div class="section-badge">📝 ฟอร์มสั่งซื้อ</div>
+            <h2>สั่งซื้อโดยตรง</h2>
+            <p>กรอกข้อมูลด้านล่างเพื่อสั่งซื้อ ทีมงานจะติดต่อกลับเพื่อยืนยันออเดอร์</p>
+        </div>
+        <div class="order-form-container">
+            <div class="order-form-box">
+                <h3>รายละเอียดการสั่งซื้อ</h3>
+                <p class="form-subtitle">กรุณาเลือกสินค้าและกรอกข้อมูลให้ครบถ้วน</p>
+
+                <form id="orderForm">
+                    <!-- Product Selection -->
+                    <div class="form-group">
+                        <label>เลือกสินค้า</label>
+                        <div class="product-select-group">
+                            <label class="product-option" data-price="12">
+                                <input type="radio" name="product" value="ขวด 700 ml" required>
+                                <div class="product-option-info">
+                                    <div class="name">🫙 แบบขวด 700 ml</div>
+                                    <div class="detail">ใช้ได้ 250-350 ต้น</div>
+                                </div>
+                                <div class="price-tag">฿12</div>
+                            </label>
+                            <label class="product-option" data-price="15">
+                                <input type="radio" name="product" value="ขวด 1000 ml">
+                                <div class="product-option-info">
+                                    <div class="name">🫙 แบบขวด 1000 ml (ขายดี)</div>
+                                    <div class="detail">ใช้ได้ 300-400 ต้น</div>
+                                </div>
+                                <div class="price-tag">฿15</div>
+                            </label>
+                            <label class="product-option" data-price="300">
+                                <input type="radio" name="product" value="แกลลอน 5 ลิตร">
+                                <div class="product-option-info">
+                                    <div class="name">🛢️ แบบแกลลอน 5 ลิตร</div>
+                                    <div class="detail">ใช้ได้ 2,000+ ต้น</div>
+                                </div>
+                                <div class="price-tag">฿300</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="form-group">
+                        <label>จำนวน</label>
+                        <div class="quantity-input">
+                            <button type="button" class="qty-btn" id="qtyMinus">-</button>
+                            <input type="number" id="orderQty" value="1" min="1" max="9999" required>
+                            <button type="button" class="qty-btn" id="qtyPlus">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary" id="orderSummary">
+                        <div>
+                            <div class="summary-label">ยอดรวมประมาณ</div>
+                        </div>
+                        <div class="summary-total" id="orderTotal">฿0</div>
+                    </div>
+
+                    <!-- Customer Info -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>ชื่อ-นามสกุล</label>
+                            <input type="text" id="orderName" placeholder="กรุณากรอกชื่อ" required>
+                        </div>
+                        <div class="form-group">
+                            <label>เบอร์โทรศัพท์</label>
+                            <input type="tel" id="orderPhone" placeholder="081-234-5678" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ที่อยู่จัดส่ง</label>
+                        <textarea id="orderAddress" placeholder="บ้านเลขที่ ซอย ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์" required style="min-height:100px;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>หมายเหตุเพิ่มเติม (ถ้ามี)</label>
+                        <textarea id="orderNote" placeholder="เช่น ต้องการใบเสร็จ, เวลาที่สะดวกรับของ..." style="min-height:80px;"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="orderSubmitBtn">🛒 ส่งคำสั่งซื้อ</button>
+                </form>
             </div>
         </div>
     </section>
@@ -1327,7 +1602,7 @@
                     <div class="contact-icon">📍</div>
                     <div class="contact-details">
                         <h4>ที่อยู่</h4>
-                        <p>232 หมู่ 7 โรงเรียนสหราษฎร์รังสฤษดิ์ <br>ถนนศรีสงคราม - ท่าดอกแก้ว <br>ตำบลศรีสงคราม อำเภอศรีสงคราม <br>จังหวัดนครพนม รหัสไปรษณีย์ 48150</p>
+                        <p>232 หมู่ 7 โรงเรียนสหราษฎร์รังสฤษดิ์ <br>ถนนศรีสงคราม - ท่าดอกแก้ว <br>ตำบลศรีสงคราม อำเภอศรีสงคราม <br>จังหวัดนครพนม รหัสไปรษณีย์ 48150</p>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -1368,7 +1643,7 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h4>เกี่ยวกับเรา</h4>
-                <p>ผลิตภัณฑ์นี้ได้รับการยอมรับในระดับประเทศ และได้รับรางวัลอันทรงเกียรติมากมาย โดยเฉพาะ รางวัลถ้วยพระราชทานสมเด็จพระกนิษฐาธิราชเจ้า กรมสมเด็จพระเทพรัตนราชสุดา ฯ สยามบรมราชกุมารี ซึ่งสะท้อนถึงคุณภาพและประโยชน์ของผลงานที่สามารถนำไปใช้เพื่อพัฒนาคุณภาพชีวิตของเกษตรกรได้อย่างแท้จริง</p>
+                <p>ผู้ผลิตและจัดจำหน่ายน้ำกรดเพิ่มน้ำหนักยางคุณภาพสูง มาตรฐานส่งออก ด้วยประสบการณ์กว่า 15 ปี</p>
             </div>
             <div class="footer-section">
                 <h4>เมนูหลัก</h4>
@@ -1399,12 +1674,31 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 กรดยางหนัก. สงวนลิขสิทธิ์. | ออกแบบโดยชุมนุมโครงงานนักวิทยาศาสตร์โรงเรียนสหราษฎร์รังสฤษดิ์</p>
+            <p>&copy; 2025 น้ำกรดเพิ่มน้ำหนักยาง. สงวนลิขสิทธิ์. | ออกแบบด้วย ❤️ เพื่อเกษตรกรไทย</p>
         </div>
     </footer>
 
     <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">↑</div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDF6TZkL6TRB3S46skT1NBXUcyZUHY0gCQ",
+            authDomain: "krodyangnak-7b119.firebaseapp.com",
+            projectId: "krodyangnak-7b119",
+            storageBucket: "krodyangnak-7b119.firebasestorage.app",
+            messagingSenderId: "797921096322",
+            appId: "1:797921096322:web:7edec9ddb02a6d89fffa9b",
+            measurementId: "G-TVY0WEH6EV"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
 
     <script>
         // Mobile Menu Toggle
@@ -1465,11 +1759,36 @@
             });
         });
 
-        // Form submission
-        document.querySelector('.contact-form form').addEventListener('submit', (e) => {
+        // Form submission - save to Firebase
+        document.querySelector('.contact-form form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('ขอบคุณที่ติดต่อเรา! เราจะติดต่อกลับโดยเร็วที่สุด');
-            e.target.reset();
+            const form = e.target;
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'กำลังส่ง...';
+            submitBtn.disabled = true;
+
+            const inputs = form.querySelectorAll('input, textarea');
+            const data = {
+                name: inputs[0].value,
+                phone: inputs[1].value,
+                email: inputs[2].value,
+                message: inputs[3].value,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                await db.collection('contacts').add(data);
+                alert('ขอบคุณที่ติดต่อเรา! เราจะติดต่อกลับโดยเร็วที่สุด');
+                form.reset();
+            } catch (error) {
+                alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+                console.error('Firebase error:', error);
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
 
         // Add animation on scroll
@@ -1493,6 +1812,92 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
+        });
+
+        // === Order Form Logic ===
+        const productOptions = document.querySelectorAll('.product-option');
+        const qtyInput = document.getElementById('orderQty');
+        const orderSummary = document.getElementById('orderSummary');
+        const orderTotal = document.getElementById('orderTotal');
+        let selectedPrice = 0;
+
+        // Product selection highlight
+        productOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                productOptions.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+                selectedPrice = parseInt(opt.getAttribute('data-price'));
+                updateOrderSummary();
+            });
+        });
+
+        // Quantity buttons
+        document.getElementById('qtyMinus').addEventListener('click', () => {
+            const v = parseInt(qtyInput.value) || 1;
+            if (v > 1) { qtyInput.value = v - 1; updateOrderSummary(); }
+        });
+        document.getElementById('qtyPlus').addEventListener('click', () => {
+            const v = parseInt(qtyInput.value) || 0;
+            qtyInput.value = v + 1;
+            updateOrderSummary();
+        });
+        qtyInput.addEventListener('input', updateOrderSummary);
+
+        function updateOrderSummary() {
+            const qty = parseInt(qtyInput.value) || 0;
+            if (selectedPrice > 0 && qty > 0) {
+                const total = selectedPrice * qty;
+                orderTotal.textContent = '฿' + total.toLocaleString();
+                orderSummary.classList.add('visible');
+            } else {
+                orderSummary.classList.remove('visible');
+            }
+        }
+
+        // Order form submission
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = document.getElementById('orderSubmitBtn');
+            const originalText = submitBtn.textContent;
+
+            const selectedProduct = form.querySelector('input[name="product"]:checked');
+            if (!selectedProduct) {
+                alert('กรุณาเลือกสินค้า');
+                return;
+            }
+
+            submitBtn.textContent = 'กำลังส่ง...';
+            submitBtn.disabled = true;
+
+            const qty = parseInt(qtyInput.value) || 1;
+            const data = {
+                product: selectedProduct.value,
+                pricePerUnit: selectedPrice,
+                quantity: qty,
+                totalPrice: selectedPrice * qty,
+                name: document.getElementById('orderName').value,
+                phone: document.getElementById('orderPhone').value,
+                address: document.getElementById('orderAddress').value,
+                note: document.getElementById('orderNote').value,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                await db.collection('orders').add(data);
+                alert('ส่งคำสั่งซื้อเรียบร้อยแล้ว! ทีมงานจะติดต่อกลับเพื่อยืนยันออเดอร์');
+                form.reset();
+                productOptions.forEach(o => o.classList.remove('selected'));
+                selectedPrice = 0;
+                orderSummary.classList.remove('visible');
+            } catch (error) {
+                alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+                console.error('Firebase error:', error);
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     </script>
 </body>
