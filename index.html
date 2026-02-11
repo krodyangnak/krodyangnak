@@ -82,15 +82,16 @@
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-1);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .nav-menu {
@@ -265,9 +266,7 @@
 
         .hero-image-wrapper {
             position: relative;
-            border-radius: 30px;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         }
 
         .product-showcase {
@@ -280,7 +279,7 @@
         .product-showcase img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         /* Features Section */
@@ -401,7 +400,7 @@
 
         .benefits-image-main {
             width: 100%;
-            height: 500px;
+            height: 650px;
             background: var(--gradient-1);
             border-radius: 30px;
             position: relative;
@@ -488,6 +487,12 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
         }
 
         .product-badge {
@@ -1185,7 +1190,7 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-icon">🌿</div>
+                <div class="logo-icon"><img src="logo.png" alt="โลโก้กรดยางหนัก"></div>
                 <span>กรดยางหนัก</span>
             </a>
             <ul class="nav-menu" id="navMenu">
@@ -1226,7 +1231,7 @@
             <div class="hero-image">
                 <div class="hero-image-wrapper">
                     <div class="product-showcase">
-                        <img src="img1.jpg" alt="น้ำกรดเพิ่มน้ำหนักยาง - ผลิตภัณฑ์คุณภาพสูง">
+                        <img src="pok.png" alt="น้ำกรดเพิ่มน้ำหนักยาง - ผลิตภัณฑ์คุณภาพสูง">
                     </div>
                 </div>
             </div>
@@ -1279,9 +1284,7 @@
         <div class="benefits-container">
             <div class="benefits-image">
                 <div class="benefits-image-main">
-                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 5rem;">
-                        🌳💚
-                    </div>
+                    <img src="show1.JPG" alt="ผลิตภัณฑ์น้ำกรดเพิ่มน้ำหนักยาง" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">
                 </div>
             </div>
             <div class="benefits-content">
@@ -1329,7 +1332,7 @@
         <div class="products-grid">
             <div class="product-card">
                 <div class="product-image">
-                    <div style="font-size: 4rem; color: white;">🫙</div>
+                    <img src="700.png" alt="น้ำกรดเพิ่มน้ำหนักยาง 700 ml">
                 </div>
                 <div class="product-info">
                     <h3>แบบขวด 700 ml</h3>
@@ -1346,13 +1349,13 @@
                             <span class="spec-label">ความเข้มข้น</span>
                             <span class="spec-value">สูง</span>
                         </div>
-                         <div class="spec-item">
+                        <div class="spec-item">
                             <span class="spec-label">ขายส่ง (คุ้มกว่า)</span>
-                            <span class="spec-value">1000+ (฿10/ขวด)</span>
+                            <span class="spec-value">1000+ (฿12/ขวด)</span>
                         </div>
                     </div>
                     <div class="product-price">
-                        ฿12 บาท <small>/ ขวด</small>
+                        ฿15 บาท <small>/ ขวด</small>
                     </div>
                     <a href="#order-form" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
                 </div>
@@ -1361,7 +1364,7 @@
             <div class="product-card">
                 <div class="product-image">
                     <div class="product-badge">ขายดี</div>
-                    <div style="font-size: 4rem; color: white;">🫙</div>
+                    <img src="1000.png" alt="น้ำกรดเพิ่มน้ำหนักยาง 1000 ml">
                 </div>
                 <div class="product-info">
                     <h3>แบบขวด 1000 ml</h3>
@@ -1380,11 +1383,11 @@
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">ขายส่ง (คุ้มกว่า)</span>
-                            <span class="spec-value">1000+ (฿12/ขวด)</span>
+                            <span class="spec-value">1000+ (฿17/ขวด)</span>
                         </div>
                     </div>
                     <div class="product-price">
-                        15 บาท <small>/ ขวด</small>
+                        ฿20 บาท <small>/ ขวด</small>
                     </div>
                     <a href="#order-form" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
                 </div>
@@ -1392,14 +1395,14 @@
 
             <div class="product-card">
                 <div class="product-image">
-                    <div style="font-size: 4rem; color: white;">🛢️</div>
+                    <img src="4L.png" alt="น้ำกรดเพิ่มน้ำหนักยาง 4 ลิตร">
                 </div>
                 <div class="product-info">
                     <h3>แบบแกลลอน</h3>
                     <div class="product-specs">
                         <div class="spec-item">
                             <span class="spec-label">ขนาด</span>
-                            <span class="spec-value">5 ลิตร</span>
+                            <span class="spec-value">4 ลิตร</span>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">ใช้ได้</span>
@@ -1411,11 +1414,11 @@
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">ขายส่ง (คุ้มกว่า)</span>
-                            <span class="spec-value">1000+ (฿290/แกลลอน)</span>
+                            <span class="spec-value">1000+ (฿230/แกลลอน)</span>
                         </div>
                     </div>
                     <div class="product-price">
-                        300 บาท <small>/ แกลลอน</small>
+                        ฿250 บาท <small>/ แกลลอน</small>
                     </div>
                     <a href="#order-form" class="btn btn-primary" style="width: 100%; justify-content: center;">สั่งซื้อเลย</a>
                 </div>
@@ -1501,29 +1504,29 @@
                     <div class="form-group">
                         <label>เลือกสินค้า</label>
                         <div class="product-select-group">
-                            <label class="product-option" data-price="12">
+                            <label class="product-option" data-price="15">
                                 <input type="radio" name="product" value="ขวด 700 ml" required>
                                 <div class="product-option-info">
                                     <div class="name">🫙 แบบขวด 700 ml</div>
                                     <div class="detail">ใช้ได้ 250-350 ต้น</div>
                                 </div>
-                                <div class="price-tag">฿12</div>
+                                <div class="price-tag">฿15</div>
                             </label>
-                            <label class="product-option" data-price="15">
+                            <label class="product-option" data-price="20">
                                 <input type="radio" name="product" value="ขวด 1000 ml">
                                 <div class="product-option-info">
                                     <div class="name">🫙 แบบขวด 1000 ml (ขายดี)</div>
                                     <div class="detail">ใช้ได้ 300-400 ต้น</div>
                                 </div>
-                                <div class="price-tag">฿15</div>
+                                <div class="price-tag">฿20</div>
                             </label>
-                            <label class="product-option" data-price="300">
-                                <input type="radio" name="product" value="แกลลอน 5 ลิตร">
+                            <label class="product-option" data-price="250">
+                                <input type="radio" name="product" value="แกลลอน 4 ลิตร">
                                 <div class="product-option-info">
-                                    <div class="name">🛢️ แบบแกลลอน 5 ลิตร</div>
+                                    <div class="name">🛢️ แบบแกลลอน 4 ลิตร</div>
                                     <div class="detail">ใช้ได้ 2,000+ ต้น</div>
                                 </div>
-                                <div class="price-tag">฿300</div>
+                                <div class="price-tag">฿250</div>
                             </label>
                         </div>
                     </div>
@@ -1657,19 +1660,19 @@
             <div class="footer-section">
                 <h4>บริการ</h4>
                 <ul>
-                    <li><a href="#">คำถามที่พบบ่อย</a></li>
-                    <li><a href="#">นโยบายการคืนสินค้า</a></li>
-                    <li><a href="#">เงื่อนไขการใช้งาน</a></li>
-                    <li><a href="#">นโยบายความเป็นส่วนตัว</a></li>
+                    <li><a href="faq.html">คำถามที่พบบ่อย</a></li>
+                    <li><a href="return-policy.html">นโยบายการคืนสินค้า</a></li>
+                    <li><a href="terms.html">เงื่อนไขการใช้งาน</a></li>
+                    <li><a href="privacy.html">นโยบายความเป็นส่วนตัว</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>ช่องทางสั่งซื้อ</h4>
                 <ul>
-                    <li><a href="#">Shopee Official</a></li>
-                    <li><a href="#">Lazada Mall</a></li>
-                    <li><a href="#">TikTok Shop</a></li>
-                    <li><a href="#">สั่งซื้อโดยตรง</a></li>
+                    <li><a href="https://shopee.co.th/product/1735260953/47105333851/" target="_blank">Shopee Official</a></li>
+                    <li><a href="#order">Lazada Mall</a></li>
+                    <li><a href="https://vt.tiktok.com/ZS9JDDAtXjyg5-CiDN4/" target="_blank">TikTok Shop</a></li>
+                    <li><a href="#order-form">สั่งซื้อโดยตรง</a></li>
                 </ul>
             </div>
         </div>

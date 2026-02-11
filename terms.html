@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เงื่อนไขการใช้งาน - น้ำกรดเพิ่มน้ำหนักยาง</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Sarabun', sans-serif; background: #f5f7f5; color: #333; }
+        .page-header {
+            background: linear-gradient(135deg, #1a472a 0%, #0d2417 100%);
+            color: white;
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .page-header p { opacity: 0.8; font-size: 15px; }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 16px;
+            transition: opacity 0.3s;
+        }
+        .back-btn:hover { opacity: 1; }
+        .container {
+            max-width: 800px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+        }
+        .content-card {
+            background: white;
+            border-radius: 14px;
+            padding: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            margin-bottom: 16px;
+        }
+        .content-card h2 {
+            font-family: 'Bai Jamjuree', sans-serif;
+            color: #1a472a;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e9;
+        }
+        .content-card h3 {
+            color: #1a472a;
+            font-size: 1.05rem;
+            margin: 20px 0 10px;
+        }
+        .content-card p, .content-card li {
+            line-height: 1.8;
+            color: #555;
+            font-size: 15px;
+        }
+        .content-card ul, .content-card ol {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        .content-card li { margin-bottom: 6px; }
+        .update-date {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .footer-link a {
+            display: inline-block;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #1a472a, #27ae60);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .footer-link a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26,71,42,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <a href="index.html" class="back-btn">&larr; กลับหน้าหลัก</a>
+        <h1>เงื่อนไขการใช้งาน</h1>
+        <p>ข้อกำหนดและเงื่อนไขในการใช้บริการเว็บไซต์และผลิตภัณฑ์ของเรา</p>
+    </div>
+    <div class="container">
+        <div class="content-card">
+            <h2>1. การยอมรับเงื่อนไข</h2>
+            <p>การเข้าใช้งานเว็บไซต์นี้ถือว่าคุณได้อ่านและยอมรับเงื่อนไขการใช้งานทั้งหมด หากไม่ยอมรับเงื่อนไข กรุณาหยุดใช้งานเว็บไซต์ทันที</p>
+        </div>
+
+        <div class="content-card">
+            <h2>2. การสั่งซื้อสินค้า</h2>
+            <ul>
+                <li>ราคาสินค้าที่แสดงบนเว็บไซต์เป็นราคาที่รวมภาษีมูลค่าเพิ่มแล้ว (ถ้ามี)</li>
+                <li>ราคาสินค้าอาจมีการเปลี่ยนแปลงโดยไม่ต้องแจ้งล่วงหน้า</li>
+                <li>การสั่งซื้อจะสมบูรณ์เมื่อได้รับการยืนยันจากทีมงานเท่านั้น</li>
+                <li>ทางร้านขอสงวนสิทธิ์ในการปฏิเสธคำสั่งซื้อหากพบว่าข้อมูลไม่ถูกต้อง</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h2>3. การจัดส่งสินค้า</h2>
+            <ul>
+                <li>จัดส่งสินค้าภายใน 1-2 วันทำการ หลังยืนยันการชำระเงิน</li>
+                <li>ระยะเวลาจัดส่ง 2-5 วันทำการ ขึ้นอยู่กับพื้นที่ปลายทาง</li>
+                <li>ค่าจัดส่งคิดตามอัตราของบริษัทขนส่ง หรือตามที่ระบุในแต่ละช่องทาง</li>
+                <li>กรณีสินค้าเสียหายระหว่างขนส่ง กรุณาแจ้งภายใน 3 วัน พร้อมหลักฐานภาพถ่าย</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h2>4. การใช้ผลิตภัณฑ์</h2>
+            <ul>
+                <li>ใช้ผลิตภัณฑ์ตามคำแนะนำที่ระบุบนฉลากเท่านั้น</li>
+                <li>เก็บรักษาในที่ร่ม ห่างจากแสงแดดและความร้อน</li>
+                <li>เก็บให้พ้นมือเด็กและสัตว์เลี้ยง</li>
+                <li>สวมถุงมือขณะใช้งาน หลีกเลี่ยงการสัมผัสผิวหนังโดยตรง</li>
+                <li>ทางบริษัทไม่รับผิดชอบต่อความเสียหายที่เกิดจากการใช้งานผิดวิธี</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <h2>5. ทรัพย์สินทางปัญญา</h2>
+            <p>เนื้อหา รูปภาพ โลโก้ และข้อมูลทั้งหมดบนเว็บไซต์นี้เป็นทรัพย์สินของบริษัท ห้ามคัดลอก ดัดแปลง หรือนำไปใช้เพื่อการค้าโดยไม่ได้รับอนุญาตเป็นลายลักษณ์อักษร</p>
+        </div>
+
+        <div class="content-card">
+            <h2>6. ข้อจำกัดความรับผิดชอบ</h2>
+            <p>ข้อมูลบนเว็บไซต์จัดทำขึ้นเพื่อให้ข้อมูลทั่วไปเท่านั้น ทางบริษัทพยายามให้ข้อมูลถูกต้องมากที่สุด แต่ไม่รับประกันว่าข้อมูลจะถูกต้องครบถ้วนทุกประการ ผลลัพธ์จากการใช้ผลิตภัณฑ์อาจแตกต่างกันตามสภาพแวดล้อมและวิธีการใช้งาน</p>
+        </div>
+
+        <div class="content-card">
+            <h2>7. การเปลี่ยนแปลงเงื่อนไข</h2>
+            <p>ทางบริษัทขอสงวนสิทธิ์ในการแก้ไขเปลี่ยนแปลงเงื่อนไขการใช้งานได้ตลอดเวลา โดยไม่ต้องแจ้งให้ทราบล่วงหน้า การใช้งานเว็บไซต์ต่อหลังการเปลี่ยนแปลงถือว่ายอมรับเงื่อนไขใหม่</p>
+        </div>
+
+        <div class="update-date">อัปเดตล่าสุด: กุมภาพันธ์ 2026</div>
+
+        <div class="footer-link">
+            <a href="index.html">&larr; กลับหน้าหลัก</a>
+        </div>
+    </div>
+</body>
+</html>
